@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="stadiumd" *ngIf="stadiums" class="mt-4">
+    <mat-card *ngFor="let stadium of stadiums" class="mb-3">
+      <mat-card-content>
+        <div class="d-flex align-items-center">
+          <div class="mr-2">
+            <img [src]="BASEURL+stadium.field_club_logo" alt="">
+          </div>
+          <div>
+            <b class="title">{{stadium.title}}</b>
+            <span class="d-block">{{stadium.field_overall_capacity_}}</span>
+          </div>
+          <div class="ml-auto">
+            <button mat-mini-fab color="warn" [routerLink]="['/stadium',stadium.nid]">
+              <i class="material-icons"> keyboard_arrow_right </i>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

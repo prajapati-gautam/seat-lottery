@@ -1,0 +1,31 @@
+<div class="container">
+  <mat-card *ngIf="stadium" class="mb-3 mt-3">{{stadium.title}}</mat-card>
+  <mat-card>
+    <mat-card-content class="text-center">
+      <div class="d-inline-block" *ngIf="stadium">
+        <img [src]="BASEURL+stadium.field_club_logo" alt="{{stadium.title}}">
+      </div>
+      <hr>
+      <div class="map-wrapper">
+        <div class="map-container mt-3" #mapwrapper>
+          <div class="action-bar mb-3 d-flex align-items-center justify-content-end">
+            <button mat-mini-fab color="primary" id="svgZoomOut"><i class="material-icons">remove</i></button>
+            <i class="material-icons ml-2 mr-2">search</i>
+            <button mat-mini-fab color="primary" id="svgZoomIn"><i class="material-icons">add</i></button>
+          </div>
+          <div *ngIf="map" class="h-100 map-wrap m-auto" [ngStyle]="{'max-width': map.image.size.width+'px', 'max-height': map.image.size.height+'px' }">
+            <svg class="w-100 h-100" attr.width="{{map.image.size.width}}" attr.height="{{map.image.size.height}}" attr.viewBox="0,0, {{map.image.size.width}}, {{map.image.size.height}}"
+              preserveAspectRatio="xMinYMin meet">
+              <g class="map-wrtapper" id="mapgroup">
+                <image attr.width="{{map.image.size.width}}" attr.height="{{map.image.size.height}}" attr.href="{{map.image.url}}"></image>
+                <g *ngFor="let block of map.blocks">
+                  <polygon attr.points="{{block.points}}" (click)="selectBlock(block.block_id)" attr.data-block-id="{{block.block_id}}"></polygon>
+                </g>
+              </g>
+          </svg>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,15 @@
+.card-type {}
+.card-type > span{display: block; width: 45px; height: 30px; background-repeat: no-repeat; background-position: right center; background-size: contain;}
+.card-type .visa { background-image: url(../../../assets/images/visa.png);}
+.card-type .mastercard { background-image: url(../../../assets/images/mastercard.png);}
+.card-type .jcb { background-image: url(../../../assets/images/jcb.png);}
+.card-type .amex { background-image: url(../../../assets/images/amex.png);}
+.card-type .maestro { background-image: url(../../../assets/images/maestro.png);}
+.card-type .dinersclub { background-image: url(../../../assets/images/dinersclub.png);}
+.card-type .discover { background-image: url(../../../assets/images/discover.png);}
+.card-type .dankort { background-image: url(../../../assets/images/dk.png);}
+.card-type .unknown { background-image: url(../../../assets/images/unknown.png);}
+
+form > .row > div[class^="col"] {margin-bottom:10px;}
+.cvv-icon {max-width: 70px; display: block;}
+.cvv-icon img {max-width: 100%;}

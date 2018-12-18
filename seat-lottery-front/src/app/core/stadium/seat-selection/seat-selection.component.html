@@ -1,0 +1,13 @@
+<div class="title">
+  <h4>Now select your lucky seat from block {{block_id}} </h4>
+  <button mat-mini-fab mat-raised-button class="close-btn" color="warn" (click)="close()"><i class="material-icons"> close </i></button>
+</div>
+<mat-dialog-content class="mat-typography">
+<div class="seat-container">
+  <ul class="d-flex flex-wrap justify-content-around">
+    <li class="seat-placeholder" *ngFor="let seat of totleSeats">
+      <button mat-fab color="warn" (click)="checkAvailability(seat.nid)" [disabled]="activeSeat(seat.field_status)">{{seat.title}}</button>
+    </li>
+  </ul>
+</div>
+</mat-dialog-content>

@@ -1,0 +1,10 @@
+<div class="container">
+  <div *ngIf="paymentData" class="p-4 text-center">
+    <h3>Your payment was successful</h3>
+    <p>Thank you so much for your support</p>
+    <p>You will shortly receive a confirmation email which will include your receipt and entry numbers.</p>
+    <p>Order number: <b>{{paymentData.reference}}</b></p>
+    <p>Transaction reference: <b>{{paymentData.transaction_id}}</b></p>
+    <p>Your entry ticket numbers are: <b>{{ticket}}</b></p>
+  </div>
+</div>

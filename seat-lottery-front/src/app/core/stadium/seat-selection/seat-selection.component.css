@@ -1,0 +1,4 @@
+.seat-container { margin-top: 20px; }
+.seat-container ul {margin:0 -5px; padding: 0; }
+.seat-container ul li.seat-placeholder { padding: 5px; list-style-type: none; }
+.close-btn { position: absolute; right: 0; top: 0;}

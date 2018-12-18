@@ -1,0 +1,191 @@
+<div class="container">
+  <form-wizard>
+    <wizard-step [title]="'Select Tickets'" [isValid]="checkIsvalid(step1)" (onNext)="onStep1Next()">
+      <div class="p-4">
+        <form #step1="ngForm" [formGroup]="userBookingStep1" novalidate>
+          <div class="row">
+            <div class="col-sm-4">
+              <mat-form-field class="w-100">
+                <input type="hidden" formControlName="affilliate">
+                <mat-label>Entries</mat-label>
+                <input matInput type="number" formControlName="entries" placeholder="Enteries" min="1" max="1" maxlength="1">
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field class="w-100">
+                <mat-label>Payment Frequency</mat-label>
+                <mat-select formControlName="paymentFrequency">
+                  <mat-option value="">Please select</mat-option>
+                  <mat-option *ngFor="let f of packege['paymentFrequency']" [value]="f">{{f}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field class="w-100">
+                <mat-label>Grand Total</mat-label>
+                <span matPrefix>£</span>
+                <input type="tel" formControlName="grandTotal" matInput placeholder="Grand Total">
+                <span matSuffix>{{ currency.value }} <input type="hidden" #currency formControlName="currency"></span>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </div>
+    </wizard-step>
+
+    <wizard-step [title]="'User Details'" [isValid]="checkIsvalid(step2)" (onNext)="onStep2Next()">
+      <div class="p-4">
+        <h6 class="text-center text-mute">Fantastic, that's 1 entry for £13 GBP to be paid every 3 months (quarterly)</h6>
+        <h5 class="text-center text-mute">Simply fill in your contact and billing address details below to continue</h5>
+        <form #step2="ngForm" [formGroup]="userBookingStep2" novalidate>
+          <div class="row">
+            <div class="col-sm-6">
+              <mat-form-field class="w-100">
+                <mat-label>First Name</mat-label>
+                <mat-icon matPrefix>person</mat-icon>
+                <input matInput type="text" formControlName="firstName" placeholder="Enter your first name">
+                <mat-error *ngIf="!firstName"> Enter first name </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+              <mat-form-field class="w-100">
+                <mat-label>Last Name</mat-label>
+                <mat-icon matPrefix>person</mat-icon>
+                <input matInput type="text" formControlName="lastName" placeholder="Enter your last name">
+                <mat-error *ngIf="!lastName"> Enter last name </mat-error>
+              </mat-form-field>
+            </div>
+            <div formGroupName="emailGroup" class="col-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <mat-form-field class="w-100">
+                    <mat-label>Email</mat-label>
+                    <mat-icon matPrefix>email</mat-icon>
+                    <input matInput type="email" formControlName="email" placeholder="Enter your email"
+                      [errorStateMatcher]="confirmValidParentMatcher">
+                    <mat-error>
+                      {{errors.email}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field class="w-100">
+                    <mat-label>Confirm Email</mat-label>
+                    <mat-icon matPrefix>email</mat-icon>
+                    <input matInput type="email" formControlName="confirmEmail" placeholder="Re-enter Email"
+                      [errorStateMatcher]="confirmValidParentMatcher">
+                    <mat-error>
+                      {{errors.confirmEmail}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field class="w-100">
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="country">
+                  <mat-option value="">Select Country</mat-option>
+                  <mat-option value="GBR">United kingdom</mat-option>
+                  <mat-option value="IRL">Ireland</mat-option>
+                  <mat-option value="AUS">Australia</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field class="w-100">
+                <mat-label>Postal Code</mat-label>
+                <input matInput type="tel" formControlName="postCode" maxlength="8" placeholder="Postal code">
+                <mat-error *ngIf="!postCode"> Enter Postal Code </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field class="w-100">
+                <mat-label>Phone Number</mat-label>
+                <span matPrefix>{{phprefix.value}} <input type="hidden" #phprefix formControlName="phPrefix" value="+44"> </span>
+                <input matInput class="pl-2" type="tel" formControlName="phoneNumber" maxlength="10" placeholder="Phone Number">
+                <mat-error *ngIf="!phoneNumber"> Enter Phone number </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <p class="text-mute">
+                We'd love to tell you about our fundraising, and how your money helps. We’ll keep your details safe and
+                never share them for marketing. Unless you ask us, we'll only use your email to send your ticket
+                numbers, and your phone no. to call you if you win.
+              </p>
+            </div>
+            <div class="col-sm-6">
+              <mat-checkbox formControlName="subscribeByEmail">Yes, I'd like to keep in touch by <strong>Email</strong></mat-checkbox>
+            </div>
+            <div class="col-sm-6">
+              <mat-checkbox formControlName="subscribeByPhone">Yes, I'd like to keep in touch by <strong>Phone</strong></mat-checkbox>
+            </div>
+            <div class="col-sm-6">
+              <mat-checkbox formControlName="subscribeByPost">Yes, I'd like to keep in touch by <strong>Post</strong></mat-checkbox>
+            </div>
+          </div>
+        </form>
+      </div>
+    </wizard-step>
+
+    <wizard-step [title]="'Add Payment'" [isValid]="checkIsvalid(step3)" (onNext)="onStep3Next()">
+      <div class="p-4">
+
+        <form #step3="ngForm" [formGroup]="userBookingStep3" novalidate>
+          <div class="row">
+            <div class="col-sm-6">
+              <mat-form-field class="w-100">
+                <mat-label>Name on card</mat-label>
+                <input matInput type="text" formControlName="nameOnCard" placeholder="Enter Name on card">
+                <mat-error *ngIf="!nameOnCard"> Enter Name on card </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+              <mat-form-field class="w-100">
+                <mat-label>Card number</mat-label>
+                <input matInput type="tel" class="creditcard-number" #cardnumber formControlName="cardNumber" ccNumber
+                  placeholder="Enter Credit card number">
+                <div matSuffix class="card-type">
+                  <span [class]="cardTypeImage"></span>
+                </div>
+                <mat-error *ngIf="!cardNumber"> Enter Credit card number </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field class="w-100">
+                <mat-label>Expiry Date</mat-label>
+                <input matInput type="tel" formControlName="cardExpiry" maxlength="7" ccExp placeholder="eg.07 / 12">
+                <mat-error *ngIf="!cardExpiry"> Enter Expiry Date </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field class="w-100">
+                <mat-label>CVV</mat-label>
+                <input matInput type="tel" formControlName="cvv" [attr.maxlength]="cvvMaxLength" ccCvc placeholder="eg.122">
+                <span matSuffix class="cvv-icon"><img src="../../../assets/images/cvv.png"></span>
+                <mat-error *ngIf="!cvv"> Enter cvv </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <mat-checkbox formControlName="agreement">I have read and agree to the Terms and Conditions and the Privacy Policy</mat-checkbox>
+            </div>
+            <div class="col-12">
+              <mat-checkbox formControlName="ageConfirm">I confirm that I am over 16 years of age</mat-checkbox>
+            </div>
+          </div>
+        </form>
+      </div>
+    </wizard-step>
+
+    <wizard-step [title]="'Done'"  (onComplate)="onComplate()">
+      <div class="p-4" [ngSwitch]="finalReview">
+        <div *ngSwitchDefault>
+            <h4>You have completed all the steps.</h4>
+        </div>
+        <div *ngSwitchCase="true">
+          <h4>Thank you! You have completed all the steps.</h4>
+        </div>
+      </div>
+    </wizard-step>
+  </form-wizard>
+</div>
