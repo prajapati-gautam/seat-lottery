@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center align-items-center vw-100 vh-100 pt-4 pb-4 pl-3 pr-3 hide-overflow">
+  <div class="login-wrapper">
+    <mat-card>
+      <form (ngSubmit)="onSubmit(user)" #user="ngForm">
+        <div class="text-center h3 text-bold"><b>LOGIN</b></div>
+        <span *ngIf="errorMessage" class="badge badge-danger mb-3">{{errorMessage}}</span>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="User name"
+          required type="email"
+          placeholder="Enter your user name"
+          [(ngModel)]="user.user" name="user"
+          #user="ngModel">
+          <mat-error *ngIf="!user.valid || !user.pristine">Enter your email.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <input matInput required type="password"
+          placeholder="Enter your password"
+          [(ngModel)]="user.password" name="password"
+          #password="ngModel">
+          <mat-error *ngIf="!password.valid || !password.pristine">Enter your password.</mat-error>
+        </mat-form-field>
+
+        <div class="w-100 mt-2">
+          <mat-checkbox [(ngModel)]="user.keepLoggedIn" name="keepsignedin"
+          #keepsignedin="ngModel">Keep me signed in</mat-checkbox>
+        </div>
+
+        <div class="w-100 mt-2  ">
+          <button mat-raised-button color="primary" [disabled]="isSubmit" type="submit">Login</button>
+        </div>
+
+      </form>
+    </mat-card>
+  </div>
+</div>

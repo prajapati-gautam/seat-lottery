@@ -1,0 +1,19 @@
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field class="d-block">
+    <input matInput placeholder="Block Name" formControlName="title">
+  </mat-form-field>
+  <mat-form-field class="d-block">
+    <input matInput placeholder="Block capacity" type="number" min="0" formControlName="field_no_of_seats">
+  </mat-form-field>
+  <mat-form-field class="d-block">
+    <textarea matInput style="min-height:200px;" placeholder="Enter Seats (one per Line/Row)" formControlName="field_seats"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<p class="text-danger" *ngIf="formError">{{formError}}</p>
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>
+<div class="data-loader" [hidden]="loaderHidden">
+  <span> We are Updating seats Please Wait..</span>
+</div>

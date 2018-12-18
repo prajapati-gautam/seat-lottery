@@ -1,0 +1,19 @@
+<div class="svg-map-main-wrapper" [className]="isLoading ? 'd-none' : 'svg-map-main-wrapper d-block'">
+    <input type="hidden" name="blockId" id="blockId" #blockId>
+  <div class="action-bar">
+    <button mat-mini-fab color="primary" id="svgZoomOut"><i class="material-icons">remove</i></button>
+    <i class="material-icons">search</i>
+    <button mat-mini-fab color="primary" id="svgZoomIn"><i class="material-icons">add</i></button>
+  </div>
+  <div #mapWrapper class="map-wrapper">
+    <div #scaleWrapper class="imageScaleWrapper">
+      <svg #svgmap class="svg-map">
+        <g class="scaleWrapper">
+          <g class="mapContainer" (domChange)="onDomChange($event)"></g>
+        </g>
+      </svg>
+      <img #backImage [src]="BASEURL+svgImg" (load)="initImage(backImage)" hidden alt="map">
+    </div>
+  </div>
+</div>
+<div class="loader" *ngIf="isLoading">We are Prepering Map assets...</div>

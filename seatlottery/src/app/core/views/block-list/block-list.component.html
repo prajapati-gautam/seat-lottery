@@ -1,0 +1,19 @@
+<div class="container">
+  <app-view-header></app-view-header>
+  <mat-card class="mt-3" *ngIf="blockList.length == 0">
+    There is no venues found
+  </mat-card>
+  <button class="mb-3 mt-3"  mat-mini-fab color="warn" (click)="backClicked()"> <i class="material-icons"> keyboard_arrow_left </i> </button>
+  <div class="list-wrapper p-4">
+    <mat-card class="d-flex p-3 mb-3" *ngFor="let block of blockList">
+      <div class="venue-details">
+        <h4 class="title">{{block.title}}</h4>
+        <p class="mb-2"><span><b>Capacity:</b></span> {{block.field_no_of_seats}}</p>
+      </div>
+      <div class="venue-action ml-auto align-self-end">
+        <button mat-raised-button color="primary" (click)="editBlock(block.nid)">Edit Block</button>
+      </div>
+    </mat-card>
+  </div>
+</div>
+

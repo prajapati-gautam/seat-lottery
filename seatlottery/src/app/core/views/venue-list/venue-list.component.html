@@ -1,0 +1,19 @@
+<div class="container">
+  <app-view-header></app-view-header>
+  <div class="list-wrapper p-4">
+    <mat-card class="d-flex p-3 mb-3" *ngFor="let venue of venueList">
+      <div class="venue-logo">
+        <img [src]="BASEURL+venue.field_club_logo">
+      </div>
+      <div class="venue-details">
+        <h4 class="title">{{venue.title}}</h4>
+        <p class="mb-2"><span><b>Capacity:</b></span> {{venue.field_overall_capacity_}}</p>
+        <p class="mb-2"><span><b>Blocks:</b></span> {{venue.field_no_of_blocks}}</p>
+      </div>
+      <div class="venue-action ml-auto align-self-end">
+        <button class="mr-2" mat-raised-button color="warn" (click)="gotoBlocklist(venue.nid)">List Blocks</button>
+        <button mat-raised-button color="primary" (click)="editVenue(venue.nid)">Edit Venue</button>
+      </div>
+    </mat-card>
+  </div>
+</div>

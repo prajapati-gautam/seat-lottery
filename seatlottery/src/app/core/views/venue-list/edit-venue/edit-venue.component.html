@@ -1,0 +1,40 @@
+<div class="container">
+  
+  <div class="wrapper p-4">
+    <input type="hidden" name="json_of_svg_map" [value]="mapJson">
+    <mat-card class="d-flex p-3 mb-3" *ngFor="let venue of currentVenue">
+      <div class="venue-details">
+         <button mat-mini-fab color="warn" (click)="backClicked()"> <i class="material-icons"> keyboard_arrow_left </i> </button>
+        <h4 class="title"></h4>
+        <p class="mb-2"><span><b>Capacity:</b>{{venue.field_overall_capacity_}}</span></p>
+        <p class="mb-2"><span><b>Blocks:</b>{{venue.field_no_of_blocks}}</span></p>
+      </div>
+      <div class="venue-logo ml-auto text-center mr-0">
+        <img [src]="BASEURL+venue.field_club_logo">
+      </div>
+    </mat-card>
+    <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
+
+    <div class="editor-block d-flex">
+      <div class="block-list">
+        <div class="h4 m-0">Blocks</div>
+        <hr class="mt-1 mb-1">
+        <div class="alert alert-info" *ngIf="blocksList.length == 0">Empty</div>
+        <mat-list class="d-block" *ngIf="blocksList.length > 0">
+          <mat-list-item *ngFor="let block of blocksList" class="d-block p-0">
+            <button mat-raised-button class="d-block" disabled="block.selected" [attr.data-block-id]="block.nid" (click)="addBlock(block.nid)">{{block.title}}</button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="map-wrapper d-flex">
+        <div *ngIf="svgImg" class="w-100">
+            <app-svg-map [svgImg]="svgImg"></app-svg-map>
+            <button mat-raised-button color="primary" data-svg-submit [disabled]="!isSvgValid" (click)="submitSvg()">Submit</button>
+        </div>
+        <div class="alert alert-info w-100 align-self-end" *ngIf="!svgImg">
+          No map details found
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
